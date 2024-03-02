@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f5394f60531ee44bf3123bf778ec2b, type: 3}
+  m_Name: Diamond Cord Num
+  m_EditorClassIdentifier: 
+  _cordNumImages:
+  - _numImage: {fileID: -808374813, guid: 3b941cb9883cb6d438d5ddf89cd51b69, type: 3}
+    _cordType: 0
+  - _numImage: {fileID: 79551353, guid: 77202bde798ef9241a53716b210fbd4e, type: 3}
+    _cordType: 0
+  - _numImage: {fileID: 1272060967, guid: c223be1206095424885b1e1f058c1cf0, type: 3}
+    _cordType: 0
+  - _numImage: {fileID: 1852930953, guid: 7dd21bd4dee823b43b4a9d0eb3ea9825, type: 3}
+    _cordType: 0
+  - _numImage: {fileID: -1232168159, guid: d87ecc733e1090e44ab67b3fdde3c4bf, type: 3}
+    _cordType: 0
+  - _numImage: {fileID: 1199223158, guid: e7911eba35b428243b3ac55d2f0ae830, type: 3}
+    _cordType: 0
+  - _numImage: {fileID: -29918698, guid: fd33bc056f8a8474893abf3c5ac74730, type: 3}
+    _cordType: 0
+  - _numImage: {fileID: 1114301721, guid: 8423e4f3a72eff947aaffe2339fe204e, type: 3}
+    _cordType: 0
+  - _numImage: {fileID: -642808269, guid: 7d810e281c1872648ad0c32733e27da7, type: 3}
+    _cordType: 0
+  - _numImage: {fileID: 1709290459, guid: 8da3770ed794a2440b5b91acc6d4cede, type: 3}
+    _cordType: 0

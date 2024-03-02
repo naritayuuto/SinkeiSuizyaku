@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e6829e828c4a5f4ca7b6f1e983e99f5, type: 3}
+  m_Name: Clover Cord Num
+  m_EditorClassIdentifier: 
+  _cordNumImages:
+  - _numImage: {fileID: -754642756, guid: 56b480213ded30244b28e72660856365, type: 3}
+    _cordType: 2
+  - _numImage: {fileID: -1961318620, guid: c2a5726b287996745aacff7b182a521d, type: 3}
+    _cordType: 2
+  - _numImage: {fileID: -639990048, guid: 9302d42f098e67c41a201e19aa1d27d0, type: 3}
+    _cordType: 2
+  - _numImage: {fileID: -1662822650, guid: a99f39bc317efcf4aae469b213d0d163, type: 3}
+    _cordType: 2
+  - _numImage: {fileID: 2067148432, guid: d0e626a1e8e53a14e908b9c98e23b8f6, type: 3}
+    _cordType: 2
+  - _numImage: {fileID: 1185307199, guid: 9e4fef354a531d446b72020d5125348d, type: 3}
+    _cordType: 2
+  - _numImage: {fileID: 115497700, guid: 0bcb19d93a016e94f93a7e2fac280bed, type: 3}
+    _cordType: 2
+  - _numImage: {fileID: 1700367768, guid: 626366a4a0c7bca4084306eb5489123b, type: 3}
+    _cordType: 2
+  - _numImage: {fileID: -1473990119, guid: 3d4efa847b2131947bb10e09e044efcc, type: 3}
+    _cordType: 2
+  - _numImage: {fileID: 1426747954, guid: 80a0d0770e8bb9f4ba714d5c5e782039, type: 3}
+    _cordType: 2
