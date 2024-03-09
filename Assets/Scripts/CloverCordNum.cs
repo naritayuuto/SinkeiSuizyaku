@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu]
 public class CloverCordNum : ScriptableObject
 {
-    public CordData[] _cordNumImages;
+    public CordData[] _cordData;
 }

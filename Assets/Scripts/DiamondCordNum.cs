@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu]
 public class DiamondCordNum : ScriptableObject
 {
-    public CordData[] _cordNumImages;
+    public CordData[] _cordData;
 }

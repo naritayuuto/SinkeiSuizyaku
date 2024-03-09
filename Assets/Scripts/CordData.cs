@@ -14,5 +14,6 @@ public enum CordType
 public class CordData
 {
     public Sprite _numImage;
+    public int _num;
     public CordType _cordType;
 }

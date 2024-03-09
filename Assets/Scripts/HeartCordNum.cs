@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu]
 public class HeartCordNum : ScriptableObject
 {
-    public CordData[] _cordNumImages;
+    public CordData[] _cordData;
 }
