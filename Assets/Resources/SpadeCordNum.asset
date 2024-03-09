@@ -10,26 +10,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 034dced868162624cba95036a2241673, type: 3}
-  m_Name: Spade Cord Num
+  m_Name: SpadeCordNum
   m_EditorClassIdentifier: 
-  _cordNumImages:
+  _cordData:
   - _numImage: {fileID: -286799165, guid: f068beb6338e31243afd5b1a3ed6604f, type: 3}
+    _num: 1
     _cordType: 1
   - _numImage: {fileID: 1757461057, guid: 99f10cb705af6b348a812c1ab511d0ce, type: 3}
+    _num: 2
     _cordType: 1
   - _numImage: {fileID: 1682640419, guid: 8523d4368d550a947a1c3cb4168ed9ff, type: 3}
+    _num: 3
     _cordType: 1
   - _numImage: {fileID: -613883052, guid: 7b52a4d2a4cc48d45bc0c270ebffc24b, type: 3}
+    _num: 4
     _cordType: 1
   - _numImage: {fileID: -1987098887, guid: 02a559c0b6c879d4297056cef79f941b, type: 3}
+    _num: 5
     _cordType: 1
   - _numImage: {fileID: -1778590215, guid: 6a15298c71266594086136f6121ae454, type: 3}
+    _num: 6
     _cordType: 1
   - _numImage: {fileID: -2083441007, guid: 07517454cd8e340429110b2e89533e3a, type: 3}
+    _num: 7
     _cordType: 1
   - _numImage: {fileID: -276558113, guid: da6a082efa6b6694f92fad9442f30fa9, type: 3}
+    _num: 8
     _cordType: 1
   - _numImage: {fileID: 2058238613, guid: 78998314942cf794786a837260fddeeb, type: 3}
+    _num: 9
     _cordType: 1
   - _numImage: {fileID: -30742508, guid: 397fcc769693d0747ac7c79d662555d9, type: 3}
+    _num: 10
     _cordType: 1
