@@ -20,9 +20,13 @@ public class Cord : MonoBehaviour
     bool _disappear = false;
     [Tooltip("透明になるまでの時間")]
     float _fadeTime = 1f;
-
     [Tooltip("カードの情報。数字、その柄か、画像")]
     CordData cordData = null;
+    [Tooltip("カードの柄と番号、cordDataが持っているため未使用")]
+    Dictionary<CordType, int> _cordNumAndType;
+
+    public CordData CordData { get => cordData; }
+    public bool Disappear { get => _disappear; }
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +45,7 @@ public class Cord : MonoBehaviour
     public void ReturnCord()
     {
         //もしカードの絵がデフォルトの物だったら数字が書いてある絵に切り替え
-        _objImage.sprite = _objImage.sprite == _defoImage ? cordData._numImage : _defoImage;        
+        _objImage.sprite = _objImage.sprite == _defoImage ? cordData._numImage : _defoImage;
     }
     public void OpenAnim()
     {
@@ -52,16 +56,16 @@ public class Cord : MonoBehaviour
         _anim.Play("CloseCord");
     }
     /// <summary>
-    /// ペアが揃った場合、透明にして非表示にする
+    /// ペアが揃った場合、透明にして非表示にし、Bool変数を変更
     /// </summary>
-    public void Disappear()
+    public void DisappearCord()
     {
         _objImage.DOColor(Color.clear, _fadeTime).OnComplete(() => _disappear = true);
     }
     /// <summary>
     /// カードの情報読み込み
     /// </summary>
-    /// <param name="_image"></param>
+    /// <param name="data">カードの情報</param>
     public void CordDataSet(CordData data)
     {
         cordData = data;
