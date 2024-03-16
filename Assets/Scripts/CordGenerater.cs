@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class Sinkeisuizyaku : MonoBehaviour
+public class CordGenerater : MonoBehaviour
 {
     [SerializeField]
     DiamondCordNum diamondCordNum = null;
@@ -19,14 +19,20 @@ public class Sinkeisuizyaku : MonoBehaviour
     [Tooltip("生成回数のカウント")]
     int _count = 0;
     [Tooltip("各柄のカード枚数の上限")]
-    const int _cordListMax = 10;
+    int _cordListMax = 10;
+    [Tooltip("数値を半分にするため使用")]
+    const int _two = 2;
     [SerializeField]
     GridLayoutGroup _gridLayoutGroup = null;
     [SerializeField, Header("生成するカードのprefab")]
     Cord _cordPrefab = null;
     [Tooltip("シーン上に存在するカード")]
-    Cord[,] _cords = null;
+    Cord[] _cords = null;
+    [Tooltip("生成するカードの情報")]
     CordData[] cordDatas = null;
+
+    public Cord[] Cords { get => _cords; set => _cords = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +48,7 @@ public class Sinkeisuizyaku : MonoBehaviour
     void CordDataShuffle()
     {
         int cordMax = _rows * _columns;
+        _cordListMax = cordMax / _two;
         cordDatas = new CordData[cordMax];
         for (int i = 0; i < cordDatas.Length; i++)
         {
@@ -56,37 +63,54 @@ public class Sinkeisuizyaku : MonoBehaviour
             cordDatas[randomNum] = cordData;
         }
     }
+    //void CordGenerate()
+    //{
+    //    _gridLayoutGroup.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+    //    _gridLayoutGroup.constraintCount = _columns;
+
+    //    _cords = null;
+    //    _cords = new Cord[_rows, _columns];
+
+    //    for (var r = 0; r < _rows; r++)
+    //    {
+    //        for (var c = 0; c < _columns; c++)
+    //        {
+    //            var cord = Instantiate(_cordPrefab, _gridLayoutGroup.transform);
+    //            _cords[r, c] = cord;
+    //            _cords[r, c].CordDataSet(cordDatas[_count]);
+    //            _count++;
+    //        }
+    //    }
+    //}
     void CordGenerate()
     {
         _gridLayoutGroup.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
         _gridLayoutGroup.constraintCount = _columns;
 
+        int cordMax = _rows * _columns;
         _cords = null;
-        _cords = new Cord[_rows, _columns];
+        _cords = new Cord[cordMax];
 
-        for (var r = 0; r < _rows; r++)
+        for (int i = 0; i < cordMax; i++)
         {
-            for (var c = 0; c < _columns; c++)
-            {
-                var cord = Instantiate(_cordPrefab, _gridLayoutGroup.transform);
-                _cords[r, c] = cord;
-                _cords[r, c].CordDataSet(cordDatas[_count]);
-                _count++;
-            }
+            var cord = Instantiate(_cordPrefab, _gridLayoutGroup.transform);
+            _cords[i] = cord;
+            _cords[i].CordDataSet(cordDatas[_count]);
+            _count++;
         }
     }
 
-    /// <summary>
-    /// 全てのカードを表に
-    /// </summary>
-    public void Opens()
-    {
-        for (var r = 0; r < _rows; r++)
-        {
-            for (var c = 0; c < _columns; c++)
-            {
-                _cords[r, c].OpenAnim();
-            }
-        }
-    }
+    ///// <summary>
+    ///// 全てのカードを表に
+    ///// </summary>
+    //public void Opens()
+    //{
+    //    for (var r = 0; r < _rows; r++)
+    //    {
+    //        for (var c = 0; c < _columns; c++)
+    //        {
+    //            _cords[r, c].OpenAnim();
+    //        }
+    //    }
+    //}
 }
