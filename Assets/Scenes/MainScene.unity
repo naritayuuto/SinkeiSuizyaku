@@ -477,7 +477,7 @@ MonoBehaviour:
   spadeCordNum: {fileID: 11400000, guid: 0cac9cc0a11731349acd3f0e44bd1b48, type: 2}
   heartCordNum: {fileID: 11400000, guid: 3e1a5490d82a92c4bad891e9b8382e4f, type: 2}
   cloverCordNum: {fileID: 11400000, guid: d785b9cb1f2476645a0bff97d508222e, type: 2}
-  _rows: 22
+  _rows: 4
   _columns: 5
   _gridLayoutGroup: {fileID: 964343986}
   _cordPrefab: {fileID: 7173465876296090581, guid: a4ec922479be14b44a40178510a211e3, type: 3}
