@@ -20,6 +20,10 @@ public class CordGenerater : MonoBehaviour
     int _count = 0;
     [Tooltip("各柄のカード枚数の上限")]
     int _cordListMax = 10;
+    [Tooltip("配列の最初の要素数を宣言するために使用")]
+    const int _zero = 0;
+    [Tooltip("Random.Rangeをintで使用するため、要素数+1の値を作り出すために使用")]
+    const int _one = 1;
     [Tooltip("数値を半分にするため使用")]
     const int _two = 2;
     [SerializeField]
@@ -39,12 +43,9 @@ public class CordGenerater : MonoBehaviour
         CordDataShuffle();
         CordGenerate();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    /// <summary>
+    /// 現在、ダイヤモンドとスペードの二種類しか含まれていません
+    /// </summary>
     void CordDataShuffle()
     {
         int cordMax = _rows * _columns;
@@ -63,25 +64,6 @@ public class CordGenerater : MonoBehaviour
             cordDatas[randomNum] = cordData;
         }
     }
-    //void CordGenerate()
-    //{
-    //    _gridLayoutGroup.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
-    //    _gridLayoutGroup.constraintCount = _columns;
-
-    //    _cords = null;
-    //    _cords = new Cord[_rows, _columns];
-
-    //    for (var r = 0; r < _rows; r++)
-    //    {
-    //        for (var c = 0; c < _columns; c++)
-    //        {
-    //            var cord = Instantiate(_cordPrefab, _gridLayoutGroup.transform);
-    //            _cords[r, c] = cord;
-    //            _cords[r, c].CordDataSet(cordDatas[_count]);
-    //            _count++;
-    //        }
-    //    }
-    //}
     void CordGenerate()
     {
         _gridLayoutGroup.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
@@ -100,17 +82,17 @@ public class CordGenerater : MonoBehaviour
         }
     }
 
-    ///// <summary>
-    ///// 全てのカードを表に
-    ///// </summary>
-    //public void Opens()
-    //{
-    //    for (var r = 0; r < _rows; r++)
-    //    {
-    //        for (var c = 0; c < _columns; c++)
-    //        {
-    //            _cords[r, c].OpenAnim();
-    //        }
-    //    }
-    //}
+    /// <summary>
+    /// 再起処理を行い、ペアが揃っていないカードを渡す。
+    /// </summary>
+    /// <returns></returns>
+    public Cord ReturnOpenCord()
+    {
+        int randomNum = Random.Range(_zero, _cords.Length + _one);
+        if (_cords[randomNum].Disappear)
+        {
+            ReturnOpenCord();
+        }
+        return _cords[randomNum];
+    }
 }
