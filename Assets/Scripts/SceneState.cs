@@ -23,10 +23,12 @@ public class SceneState : MonoBehaviour
     TurnState _turnState = TurnState.None;
     [Tooltip("画面内の状況")]
     StageState _stageState = StageState.None;
-    [SerializeField]
+    [SerializeField,Header("敵の行動script")]
     Enemy _enemy = null;
-    [Header("誰の手番かを知らせるアニメーションテキスト")]
+    [SerializeField,Header("誰の手番かを知らせるアニメーションテキスト")]
     TextMeshProUGUI _msgText = null;
+    [SerializeField, Header("AnimationText")]
+    Animator _textAnim = null;
     [Tooltip("プレイヤー1の手番であることを示す値")]
     const int _zero = 0;
     [Tooltip("プレイヤー2の手番であることを示す値")]
@@ -40,7 +42,7 @@ public class SceneState : MonoBehaviour
         set
         {
             _turnState = value;
-            _msgText.text = _turnState == TurnState.player1 ? "あなたの手番です" : "相手の手番です";
+            PlayTurn();
         }
     }
     public StageState StageState 
@@ -56,21 +58,26 @@ public class SceneState : MonoBehaviour
         } 
     }
 
-    private void Awake()
+    private void Start()
     {
+        if (!_textAnim)
+        {
+            Debug.LogError($"{gameObject.name}のSceneStateにtextのアニメーションをセットしてください");
+        }
         switch (GameManager.Instance.PlayNum)
         {
-            case 0:
-                int num = Random.Range(0, 1);
+            case _zero:
+                int num = Random.Range(_one, _two);
                 _turnState = (TurnState)num;
                 break;
-            case 1:
+            case _one:
                 _turnState = TurnState.player1;
                 break;
-            case 2:
+            case _two:
                 _turnState = TurnState.player2;
                 break;
         }
+        PlayTurn();
         _stageState = StageState.ennsyutu;
     }
 
@@ -88,6 +95,12 @@ public class SceneState : MonoBehaviour
     public void TurnChange()
     {
         _turnState = _turnState == TurnState.player1 ? TurnState.player2 : TurnState.player1;
+        PlayTurn();
     }
 
+    void PlayTurn()
+    {
+        _msgText.text = _turnState == TurnState.player1 ? "あなたの手番です" : "相手の手番です";
+        _textAnim.Play("Text", 0, 0.0f);
+    }
 }
