@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager _instance;
-    [Tooltip("0‚È‚çƒ‰ƒ“ƒ_ƒ€A1‚È‚çæU,2‚È‚çŒãU")]
+    [SerializeField,Header("0‚È‚çƒ‰ƒ“ƒ_ƒ€A1‚È‚çæU,2‚È‚çŒãU"),Tooltip("0‚È‚çƒ‰ƒ“ƒ_ƒ€A1‚È‚çæU,2‚È‚çŒãU")]
     int _playNum = 0;
 
     public static GameManager Instance => _instance;
