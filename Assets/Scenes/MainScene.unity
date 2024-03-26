@@ -523,6 +523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playNum: 2
+  _enemyPower: 1
 --- !u!4 &692386977
 Transform:
   m_ObjectHideFlags: 0
