@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -11,6 +12,8 @@ public class CordJudge : MonoBehaviour, IPointerClickHandler
     CordGenerater _cordGenerater = null;
     [SerializeField, Header("デバッグ確認のため、セットしないこと")]
     List<Cord> _cords = new List<Cord>();
+    [Tooltip("消えていないカードのリスト")]
+    List<Cord> _notDSPscords = new List<Cord>();
     [SerializeField, Header("clear確認用のパネル")]
     GameObject _panel = null;
     [Tooltip("要素数零番目を示す値")]
@@ -23,9 +26,12 @@ public class CordJudge : MonoBehaviour, IPointerClickHandler
     bool _judge = false;
     [Tooltip("ペアが揃った場合True")]
     bool _pair = false;
+    [Tooltip("カードが全てめくられたらTrue")]
+    bool _clear = true;
     // Start is called before the first frame update
     void Start()
     {
+        _notDSPscords = _cordGenerater.Cords.ToList();
         if (_cordGenerater == null)
         {
             Debug.LogError($"CordGeneraterを{gameObject.name}のCordJudgeにセットしてください");
@@ -87,6 +93,7 @@ public class CordJudge : MonoBehaviour, IPointerClickHandler
             foreach (var cord in _cords)
             {
                 cord.DisappearCord();
+                _notDSPscords.Remove(cord);
             }
             _pair = true;
         }
@@ -111,31 +118,44 @@ public class CordJudge : MonoBehaviour, IPointerClickHandler
     /// </summary>
     public void TurnJudge()
     {
-        _sceneState.StageState = StageState.ennsyutu;
-        if (!_pair)
+        if (!_clear)
         {
-            _sceneState.TurnChange();
-        }
-        else
-        {//揃っていたら同じ人がめくる
-            _sceneState.TurnState = _sceneState.TurnState;
+            _sceneState.StageState = StageState.ennsyutu;
+            if (!_pair)
+            {
+                _sceneState.TurnChange();
+            }
+            else
+            {//揃っていたら同じ人がめくる
+                _sceneState.TurnState = _sceneState.TurnState;
+            }
         }
     }
 
     void ClearJudge()
     {
-        bool clear = true;
+        _clear = true;
         foreach (var cord in _cordGenerater.Cords)
         {
             if (cord.Disappear == false)
             {
-                clear = false;
+                _clear = false;
                 break;
             }
         }
-        if (clear)
+        if (_clear)
         {
             _panel.SetActive(true);
         }
+    }
+
+    /// <summary>
+    /// ペアが揃っていないカードを渡す。
+    /// </summary>
+    /// <returns></returns>
+    public Cord ReturnOpenCordJudge()
+    {
+        int randomNum = Random.Range(_zero, _notDSPscords.Count);
+        return _notDSPscords[randomNum];
     }
 }
