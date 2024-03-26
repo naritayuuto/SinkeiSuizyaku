@@ -16,7 +16,7 @@ public class Cord : MonoBehaviour
     Animator _anim = null;
     [Tooltip("めくっていたらTrue")]
     public bool _open = false;
-    [Tooltip("ペアが揃った場合True")]
+    [SerializeField,Tooltip("ペアが揃った場合True")]
     bool _disappear = false;
     [Tooltip("透明になるまでの時間")]
     float _fadeTime = 1f;
@@ -34,11 +34,6 @@ public class Cord : MonoBehaviour
         _objImage = GetComponent<Image>();
         _objImage.sprite = _defoImage;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
     /// <summary>
     /// アニメーションイベント
     /// </summary>
@@ -50,6 +45,10 @@ public class Cord : MonoBehaviour
     public void OpenAnim()
     {
         _anim.Play("OpenCord");
+        if(!_open)
+        {
+            _open = true;
+        }
     }
     public void CloseAnim()
     {
