@@ -46,10 +46,11 @@ public class Enemy : MonoBehaviour
     IEnumerator EnemyTurn()
     {
         yield return new WaitForSeconds(_coolTime);
+        _cords = new List<Cord>();
         //開くカードを取得し開く
-        for (int i = 0; i < _cords.Count; i++)
+        for (int i = 0; i < _maxPairNum; i++)
         {
-            _cords.Add(_cordGenerater.ReturnOpenCord());
+            _cords.Add(_cordJudge.ReturnOpenCordJudge());
             if (_cords.Count == _maxPairNum && _cords[_zero].CordData._numImage == _cords[_one].CordData._numImage)
             {
                 _cords.Remove(_cords[_one]);
@@ -61,7 +62,7 @@ public class Enemy : MonoBehaviour
                 yield return new WaitForSeconds(_coolTime);
             }
         }
-        yield return new WaitForSeconds(_coolTime);
+        //yield return new WaitForSeconds(_coolTime);
         yield break;
     }
 }
