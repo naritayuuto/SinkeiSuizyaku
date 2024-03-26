@@ -13,7 +13,9 @@ public class CordJudge : MonoBehaviour, IPointerClickHandler
     [SerializeField, Header("デバッグ確認のため、セットしないこと")]
     List<Cord> _cords = new List<Cord>();
     [Tooltip("消えていないカードのリスト")]
-    List<Cord> _notDSPscords = new List<Cord>();
+    List<Cord> _notDSPCords = new List<Cord>();
+    [Tooltip("めくられたカードのリスト")]
+    List<Cord> _openCords = new List<Cord>();
     [SerializeField, Header("clear確認用のパネル")]
     GameObject _panel = null;
     [Tooltip("要素数零番目を示す値")]
@@ -28,10 +30,13 @@ public class CordJudge : MonoBehaviour, IPointerClickHandler
     bool _pair = false;
     [Tooltip("カードが全てめくられたらTrue")]
     bool _clear = true;
+
+    public List<Cord> OpenCords { get => _openCords; }
+
     // Start is called before the first frame update
     void Start()
     {
-        _notDSPscords = _cordGenerater.Cords.ToList();
+        _notDSPCords = _cordGenerater.Cords.ToList();
         if (_cordGenerater == null)
         {
             Debug.LogError($"CordGeneraterを{gameObject.name}のCordJudgeにセットしてください");
@@ -93,7 +98,11 @@ public class CordJudge : MonoBehaviour, IPointerClickHandler
             foreach (var cord in _cords)
             {
                 cord.DisappearCord();
-                _notDSPscords.Remove(cord);
+                _notDSPCords.Remove(cord);
+                if(_openCords.Contains(cord))
+                {
+                    _openCords.Remove(cord);
+                }
             }
             _pair = true;
         }
@@ -102,6 +111,11 @@ public class CordJudge : MonoBehaviour, IPointerClickHandler
             foreach (var cord in _cords)
             {
                 cord.CloseAnim();
+                //開いたカードの数字を記録
+                if (!_openCords.Contains(cord))
+                {
+                    _openCords.Add(cord);
+                }
             }
             _pair = false;
         }
@@ -155,7 +169,36 @@ public class CordJudge : MonoBehaviour, IPointerClickHandler
     /// <returns></returns>
     public Cord ReturnOpenCordJudge()
     {
-        int randomNum = Random.Range(_zero, _notDSPscords.Count);
-        return _notDSPscords[randomNum];
+           int randomNum = Random.Range(_zero, _notDSPCords.Count);
+            return _notDSPCords[randomNum];
+    }
+
+
+    public List<Cord> PairCord()
+    {
+        bool pair = false;
+        List<Cord> cords = new List<Cord>();
+        for(int i = 0; i < _openCords.Count; i++)
+        {
+            if (!pair)
+            {
+                for (int count = 0; count < _openCords.Count; count++)
+                {
+                    //自分以外で同じ数字のカードを探す
+                    if (_openCords[i] != _openCords[count] && _openCords[i].CordData._num == _openCords[count].CordData._num)
+                    {
+                        cords.Add(_openCords[i]);
+                        cords.Add(_openCords[count]);
+                        pair = true;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                break;
+            }
+        }
+        return cords;
     }
 }
