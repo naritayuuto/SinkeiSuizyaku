@@ -81,18 +81,4 @@ public class CordGenerater : MonoBehaviour
             _count++;
         }
     }
-
-    /// <summary>
-    /// 再起処理を行い、ペアが揃っていないカードを渡す。
-    /// </summary>
-    /// <returns></returns>
-    public Cord ReturnOpenCord()
-    {
-        int randomNum = Random.Range(_zero, _cords.Length + _one);
-        if (_cords[randomNum].Disappear)
-        {
-            ReturnOpenCord();
-        }
-        return _cords[randomNum];
-    }
 }
