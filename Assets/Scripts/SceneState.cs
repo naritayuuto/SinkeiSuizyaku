@@ -41,8 +41,10 @@ public class SceneState : MonoBehaviour
         get => _turnState;
         set
         {
-            _turnState = value;
-            PlayTurn();
+            if (_turnState != value)
+            {
+                TurnChange();
+            }
         }
     }
     public StageState StageState 
@@ -77,7 +79,7 @@ public class SceneState : MonoBehaviour
                 _turnState = TurnState.player2;
                 break;
         }
-        PlayTurn();
+        UIManager.Instance.PlayTurn(_turnState);
         _stageState = StageState.ennsyutu;
     }
 
@@ -95,12 +97,6 @@ public class SceneState : MonoBehaviour
     public void TurnChange()
     {
         _turnState = _turnState == TurnState.player1 ? TurnState.player2 : TurnState.player1;
-        PlayTurn();
-    }
-
-    void PlayTurn()
-    {
-        _msgText.text = _turnState == TurnState.player1 ? "‚ ‚È‚½‚ÌŽè”Ô‚Å‚·" : "‘ŠŽè‚ÌŽè”Ô‚Å‚·";
-        _textAnim.Play("Text", 0, 0.0f);
+        UIManager.Instance.PlayTurn(_turnState);
     }
 }
