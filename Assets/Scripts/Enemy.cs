@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     CordGenerater _cordGenerater = null;
     [SerializeField]
     CordJudge _cordJudge = null;
+    [Tooltip("Enemyのコルーチン")]
+    IEnumerator _enemyCol = null;
     [SerializeField, Header("デバッグ確認のため、セットしないこと"), Tooltip("めくるカード")]
     List<Cord> _cords = new List<Cord>();
     [Tooltip("1枚めくった後の待ち時間")]
@@ -35,7 +37,8 @@ public class Enemy : MonoBehaviour
     }
     public void EnemyTurnStart()
     {
-        StartCoroutine(EnemyTurn());
+        _enemyCol = EnemyTurn();
+        StartCoroutine(_enemyCol);
     }
 
     IEnumerator EnemyTurn()
@@ -86,5 +89,19 @@ public class Enemy : MonoBehaviour
             }
         }
         yield break;
+    }
+
+    public void PauseEnemy()
+    {
+        if(_enemyCol == null)
+        {
+            return;
+        }
+        StopCoroutine(_enemyCol);
+    }
+
+    public void NotPauseEnemy()
+    {
+        StartCoroutine(_enemyCol);
     }
 }
