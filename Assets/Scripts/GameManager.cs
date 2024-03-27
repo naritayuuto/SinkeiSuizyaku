@@ -10,6 +10,11 @@ public class GameManager : MonoBehaviour
 
     [SerializeField, Header("敵の強さ(0なら簡単,1なら難しい)")]
     int _enemyPower = 0;
+
+    [Tooltip("カードが全て非表示の場合True")]
+    public bool Finish = false;
+
+    public bool Pause = false;
     public static GameManager Instance => _instance;
 
     public int PlayNum { get => _playNum; set => _playNum = value; }
