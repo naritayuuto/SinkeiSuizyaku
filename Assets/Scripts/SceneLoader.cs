@@ -7,28 +7,20 @@ using DG.Tweening;
 
 public class SceneLoader : MonoBehaviour
 {
-    enum SceneNum
-    {
-        Title,
-        Main
-    }
-
     [SerializeField, Header("フェードにかかる時間"), Tooltip("フェードにかかる時間")]
     float _fadeSpeed = 1f;
     [SerializeField]
     Image _fadePanel = null;
-    [SerializeField,Header("ロードしたいシーン")]
-    SceneNum _sceneNum = SceneNum.Title;
 
-    public void LoadScene()
+    public void LoadScene(int sceneNum)
     {
         if (_fadePanel)
         {
-            _fadePanel.DOColor(Color.black, _fadeSpeed).OnComplete(() => SceneManager.LoadScene((int)_sceneNum));
+            _fadePanel.DOColor(Color.black, _fadeSpeed).OnComplete(() => SceneManager.LoadScene(sceneNum));
         }
         else
         {
-            SceneManager.LoadScene((int)_sceneNum);
+            SceneManager.LoadScene(sceneNum);
         }
     }
 }
