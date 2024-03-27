@@ -11,6 +11,10 @@ public class FarstAttacker : MonoBehaviour
     const int _zero = 0;
     const int _one = 1;
     const int _two = 2;
+    private void Start()
+    {
+        TextChange();
+    }
     public void FarstAttackerNumPlus()
     {
         GameManager.Instance.PlayNum = GameManager.Instance.PlayNum < _two ? GameManager.Instance.PlayNum + _one : _zero;
