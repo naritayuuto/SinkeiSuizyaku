@@ -28,8 +28,6 @@ public class CordJudge : MonoBehaviour, IPointerClickHandler
     bool _judge = false;
     [Tooltip("ペアが揃った場合True")]
     bool _pair = false;
-    [Tooltip("カードが全てめくられたらTrue")]
-    bool _clear = true;
 
     public List<Cord> OpenCords { get => _openCords; }
 
@@ -99,7 +97,7 @@ public class CordJudge : MonoBehaviour, IPointerClickHandler
             {
                 cord.DisappearCord();
                 _notDSPCords.Remove(cord);
-                if(_openCords.Contains(cord))
+                if (_openCords.Contains(cord))
                 {
                     _openCords.Remove(cord);
                 }
@@ -120,6 +118,17 @@ public class CordJudge : MonoBehaviour, IPointerClickHandler
             _pair = false;
         }
         _cords = new List<Cord>();
+        if(_pair)
+        {
+            if(_sceneState.TurnState == TurnState.player1)
+            {
+                UIManager.Instance.PlayerPair++;
+            }
+            else if(_sceneState.TurnState == TurnState.player2)
+            {
+                UIManager.Instance.EnemyPair++;
+            }
+        }
         yield return new WaitForSeconds(_one);
         _judge = false;
         ClearJudge();
@@ -132,7 +141,7 @@ public class CordJudge : MonoBehaviour, IPointerClickHandler
     /// </summary>
     public void TurnJudge()
     {
-        if (!_clear)
+        if (!GameManager.Instance.Finish)
         {
             _sceneState.StageState = StageState.ennsyutu;
             if (!_pair)
@@ -142,24 +151,27 @@ public class CordJudge : MonoBehaviour, IPointerClickHandler
             else
             {//揃っていたら同じ人がめくる
                 _sceneState.TurnState = _sceneState.TurnState;
+                _sceneState.StageState = StageState.erabu;
             }
         }
     }
 
     void ClearJudge()
     {
-        _clear = true;
+        bool finish = true;       
         foreach (var cord in _cordGenerater.Cords)
         {
             if (cord.Disappear == false)
             {
-                _clear = false;
+                finish = false;
                 break;
             }
         }
-        if (_clear)
+        if (finish)
         {
+            GameManager.Instance.Finish = true;
             _panel.SetActive(true);
+            UIManager.Instance.Result();
         }
     }
 
@@ -169,8 +181,8 @@ public class CordJudge : MonoBehaviour, IPointerClickHandler
     /// <returns></returns>
     public Cord ReturnOpenCordJudge()
     {
-           int randomNum = Random.Range(_zero, _notDSPCords.Count);
-            return _notDSPCords[randomNum];
+        int randomNum = Random.Range(_zero, _notDSPCords.Count);
+        return _notDSPCords[randomNum];
     }
 
 
@@ -178,7 +190,7 @@ public class CordJudge : MonoBehaviour, IPointerClickHandler
     {
         bool pair = false;
         List<Cord> cords = new List<Cord>();
-        for(int i = 0; i < _openCords.Count; i++)
+        for (int i = 0; i < _openCords.Count; i++)
         {
             if (!pair)
             {
