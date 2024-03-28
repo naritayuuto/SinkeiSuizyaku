@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 289d224934b4b784aab699c3d18a9d34, type: 3}
+  m_Name: SEList
+  m_EditorClassIdentifier: 
+  SEDatas:
+  - Clip: {fileID: 8300000, guid: 922cc18d58a4708418e93d97acc166b5, type: 3}
+    SEType: 0
+  - Clip: {fileID: 8300000, guid: 8b0bf8f0711f065459e523c3ad9ea8da, type: 3}
+    SEType: 1
+  - Clip: {fileID: 8300000, guid: 5372d128a4f5e0b46868e68207d4d86f, type: 3}
+    SEType: 2
+  - Clip: {fileID: 8300000, guid: 713e6264709ec86479745e912dcbfbde, type: 3}
+    SEType: 3
+  - Clip: {fileID: 8300000, guid: d3b38df3a3f5d474baf1d3e0e73c078d, type: 3}
+    SEType: 4

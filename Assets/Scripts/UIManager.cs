@@ -31,6 +31,8 @@ public class UIManager : MonoBehaviour
     TextMeshProUGUI _enemyPairResult = null;
     [SerializeField, Header("結果画面")]
     TextMeshProUGUI _TimerResult = null;
+    [SerializeField, Header("終了時に表示に使用するパネル")]
+    GameObject _panel = null;
     [Tooltip("ターンが切り替わった時に表示する")]
     string _playerTurnMSG = "自分の手番";
     [Tooltip("ターンが切り替わった時に表示する")]
@@ -77,6 +79,7 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+        _panel.SetActive(false);
     }
     // Update is called once per frame
     void Update()
@@ -109,11 +112,14 @@ public class UIManager : MonoBehaviour
 
     public void Result()
     {
+        SoundManager.Instance.StopBGM();
         _playerPairResult.text = $"{_playerPair}";
         _enemyPairResult.text = $"{_enemyPair}";
         _TimerResult.text = _timerText.text;
+        _panel.SetActive(true);
         if (_playerPair == _enemyPair)
         {
+            SoundManager.Instance.BGMPlay(BGMType.Draw);
             _playerResult.text = "Draw";
             _enemyResult.text = "Draw";
             DrawText();
@@ -121,6 +127,7 @@ public class UIManager : MonoBehaviour
         }
         else if (_playerPair > _enemyPair)
         {
+            SoundManager.Instance.BGMPlay(BGMType.Victory);
             _playerResult.text = "Winner";
             _enemyResult.text = "Loser";
             ClearText();
@@ -128,6 +135,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            SoundManager.Instance.BGMPlay(BGMType.Lose);
             _playerResult.text = "Loser";
             _enemyResult.text = "Winner";
             GameOverText();

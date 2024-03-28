@@ -16,8 +16,6 @@ public class CordJudge : MonoBehaviour, IPointerClickHandler
     List<Cord> _notDSPCords = new List<Cord>();
     [Tooltip("めくられたカードのリスト")]
     List<Cord> _openCords = new List<Cord>();
-    [SerializeField, Header("clear確認用のパネル")]
-    GameObject _panel = null;
     [Tooltip("要素数零番目を示す値")]
     const int _zero = 0;
     [Tooltip("要素数一番目を示す値")]
@@ -43,7 +41,6 @@ public class CordJudge : MonoBehaviour, IPointerClickHandler
         {
             Debug.LogError($"SceneStateを{gameObject.name}のCordJudgeにセットしてください");
         }
-        _panel.SetActive(false);
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -71,6 +68,7 @@ public class CordJudge : MonoBehaviour, IPointerClickHandler
         if (_cords.Count < _maxPairNum)
         {
             cord.OpenAnim();
+            SoundManager.Instance.SEPlay(SEType.CordReturn);
             _cords.Add(cord);
             if (_cords.Count == _maxPairNum)
             {
@@ -120,6 +118,7 @@ public class CordJudge : MonoBehaviour, IPointerClickHandler
         _cords = new List<Cord>();
         if(_pair)
         {
+            SoundManager.Instance.SEPlay(SEType.Pair);
             if(_sceneState.TurnState == TurnState.player1)
             {
                 UIManager.Instance.PlayerPair++;
@@ -128,6 +127,10 @@ public class CordJudge : MonoBehaviour, IPointerClickHandler
             {
                 UIManager.Instance.EnemyPair++;
             }
+        }
+        else
+        {
+            SoundManager.Instance.SEPlay(SEType.NotPair);
         }
         yield return new WaitForSeconds(_one);
         _judge = false;
@@ -170,7 +173,6 @@ public class CordJudge : MonoBehaviour, IPointerClickHandler
         if (finish)
         {
             GameManager.Instance.Finish = true;
-            _panel.SetActive(true);
             UIManager.Instance.Result();
         }
     }
